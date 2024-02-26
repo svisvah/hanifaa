@@ -1,0 +1,16 @@
+{
+    "banners": {
+        "column": {
+            "banner_id": true,
+            "banner_image": true,
+            "alt_text": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+       
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

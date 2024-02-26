@@ -1,0 +1,60 @@
+<?php
+/** @var \WholesaleCustomer\ProductRestriction\Block\Subcategories $block */
+$categories = $block->getCategories();
+?>
+
+<style>
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); 
+        gap: 20px;
+    }
+
+    .category-item {
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .category-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    p.category-name {
+    text-align: center;
+    display: block;
+    line-height: 22.4px;
+    font-family: Lato Regular;
+    font-size: 19px;
+    color: #0d0d0e;
+}
+.shopbycategory-title {
+    font-family: Lato Bold;
+    color: #0d0d0e;
+    font-size: 29px;
+    margin-bottom: 35px;
+}
+@media screen  and (min-width: 769px){
+.shopbycategories {
+    max-width: 1280px;
+    margin: 0 auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+}
+</style>
+<h3 class="shopbycategory-title">Shop by categories</h1>
+<div class="category-grid">
+    <?php foreach ($categories as $category) : ?>
+        <?php if ($category->getImageUrl()) : ?>
+            <div class="category-item">
+                <a href="<?= $category->getUrl() ?>">
+                    <img class="category-image" src="<?= $category->getImageUrl() ?>" alt="<?= $block->escapeHtml($category->getName()) ?>">
+                </a>
+                <p class="category-name"><?= $block->escapeHtml($category->getName()) ?></p>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>

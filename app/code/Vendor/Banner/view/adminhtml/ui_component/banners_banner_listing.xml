@@ -1,0 +1,250 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">banners_banner_listing.Vendor_Banner_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>Vendor_Banner_columns</spinner>
+		<deps>
+			<dep>banners_banner_listing.Vendor_Banner_listing_data_source</dep>
+		</deps>
+		<buttons>
+			<button name="add">
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add new Banner</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource name="Vendor_Banner_listing_data_source">
+		<argument name="dataProvider" xsi:type="configurableObject">
+			<argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+			<argument name="name" xsi:type="string">Vendor_Banner_listing_data_source</argument>
+			<argument name="primaryFieldName" xsi:type="string">banner_id</argument>
+			<argument name="requestFieldName" xsi:type="string">banner_id</argument>
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+					<item name="update_url" path="mui/index/render" xsi:type="url"/>
+					<item name="storageConfig" xsi:type="array">
+						<item name="indexField" xsi:type="string">banner_id</item>
+					</item>
+				</item>
+			</argument>
+		</argument>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<massaction name="listing_massaction">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="selectProvider" xsi:type="string">banners_banner_listing.banners_banner_listing.Vendor_Banner_columns.ids</item>
+					<item name="indexField" xsi:type="string">id</item>
+				</item>
+			</argument>
+			<action name="delete">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">delete</item>
+						<item name="label" xsi:type="string" translate="true">Delete</item>
+						<item name="url" xsi:type="url" path="banners/banner/massDelete"/>
+						<item name="confirm" xsi:type="array">
+							<item name="name" xsi:type="string" translate="true">Delete items</item>
+							<item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+			<action name="edit">
+				<argument name="data" xsi:type="array">
+					<item name="config" xsi:type="array">
+						<item name="type" xsi:type="string">edit</item>
+						<item name="label" xsi:type="string" translate="true">Edit</item>
+						<item name="callback" xsi:type="array">
+							<item name="provider" xsi:type="string">banners_banner_listing.banners_banner_listing.Vendor_Banner_columns_editor</item>
+							<item name="target" xsi:type="string">editSelected</item>
+						</item>
+					</item>
+				</argument>
+			</action>
+			<action name="disable">
+				<settings>
+					<url path="banners/banner/massDisable"/>
+					<type>disable</type>
+					<label translate="true">Disable</label>
+				</settings>
+			</action>
+			<action name="enable">
+				<settings>
+					<url path="banners/banner/massEnable"/>
+					<type>enable</type>
+					<label translate="true">Enable</label>
+				</settings>
+			</action>
+		</massaction>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+		<filterSearch name="fulltext">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="provider" xsi:type="string">banners_banner_listing.Vendor_Banner_listing_data_source</item>
+					<item name="chipsProvider" xsi:type="string">banners_banner_listing.banners_banner_listing.listing_top.listing_filters_chips</item>
+					<item name="storageConfig" xsi:type="array">
+						<item name="provider" xsi:type="string">banners_banner_listing.banners_banner_listing.listing_top.bookmarks</item>
+						<item name="namespace" xsi:type="string">current.search</item>
+					</item>
+				</item>
+			</argument>
+		</filterSearch>
+	</listingToolbar>
+	<columns name="Vendor_Banner_columns">
+		<settings>
+			<editorConfig>
+				<param name="selectProvider" xsi:type="string">banners_banner_listing.banners_banner_listing.Vendor_Banner_columns.ids</param>
+				<param name="enabled" xsi:type="boolean">true</param>
+				<param name="indexField" xsi:type="string">banner_id</param>
+				<param name="clientConfig" xsi:type="array">
+					<item name="saveUrl" xsi:type="url" path="banners/banner/inlineEdit"/>
+					<item name="validateBeforeSave" xsi:type="boolean">false</item>
+				</param>
+			</editorConfig>
+			<childDefaults>
+				<param name="fieldAction" xsi:type="array">
+					<item name="provider" xsi:type="string">banners_banner_listing.banners_banner_listing.Vendor_Banner_columns_editor</item>
+					<item name="target" xsi:type="string">startEdit</item>
+					<item name="params" xsi:type="array">
+						<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+						<item name="1" xsi:type="boolean">true</item>
+					</item>
+				</param>
+			</childDefaults>
+		</settings>
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>banner_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="banner_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">Banner ID</label>
+			</settings>
+		</column>
+		<column name="banner_image" class="Vendor\Banner\Ui\Component\Listing\Column\Thumbnail">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+					<item name="sortable" xsi:type="boolean">false</item>
+					<item name="has_preview" xsi:type="string">1</item>
+					<item name="label" xsi:type="string" translate="true">Banner Image</item>
+				</item>
+			</argument>
+		</column>
+		<column name="alt_text">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Alt Text</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+				<column name="description">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Description</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+				<column name="enable_button">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Vendor\Banner\Model\Source\Status</item>
+				<item name="config" xsi:type="array">
+					<item name="editor" xsi:type="array">
+						<item name="editorType" xsi:type="string">select</item>
+						<item name="validation" xsi:type="array">
+							<item name="required-entry" xsi:type="boolean">true</item>
+						</item>
+					</item>
+					<item name="filter" xsi:type="string">select</item>
+					<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+					<item name="label" xsi:type="string" translate="true">Enable Button</item>
+					<item name="dataType" xsi:type="string">select</item>
+					<item name="sortOrder" xsi:type="number">30</item>
+					<item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+				</item>
+			</argument>
+		</column>
+		<column name="status">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Vendor\Banner\Model\Source\Status</item>
+				<item name="config" xsi:type="array">
+					<item name="editor" xsi:type="array">
+						<item name="editorType" xsi:type="string">select</item>
+						<item name="validation" xsi:type="array">
+							<item name="required-entry" xsi:type="boolean">true</item>
+						</item>
+					</item>
+					<item name="filter" xsi:type="string">select</item>
+					<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+					<item name="label" xsi:type="string" translate="true">Status</item>
+					<item name="dataType" xsi:type="string">select</item>
+					<item name="sortOrder" xsi:type="number">30</item>
+					<item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+				</item>
+			</argument>
+		</column>
+
+		<column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+			<settings>
+				<filter>dateRange</filter>
+				<dataType>date</dataType>
+				<label translate="true">Created At</label>
+				<editor>
+					<editorType>date</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+			<settings>
+				<filter>dateRange</filter>
+				<dataType>date</dataType>
+				<label translate="true">Updated at</label>
+				<editor>
+					<editorType>date</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<actionsColumn name="actions" class="Vendor\Banner\Ui\Component\Listing\Column\CustomformActions">
+			<settings>
+				<indexField>id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+				<sortOrder>200</sortOrder>
+			</settings>
+		</actionsColumn>
+	</columns>
+</listing>
+
+		

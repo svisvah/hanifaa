@@ -1,0 +1,237 @@
+<?php $collection = $block->getCustomformCollection();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+
+$url = str_replace("index.php/","",$storeManager->getStore()->getBaseUrl()); ?>
+
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+
+$url = str_replace("index.php/","",$storeManager->getStore()->getBaseUrl()); ?>
+<div class="owl-carousel owl-theme banner_sec" id="dynamic_banner">
+    <?php foreach ($collection as $banner) : ?>
+        <?php $bannerImage = $url . 'media/banners/banner_images' . $banner->getBannerImage(); ?>
+        <div class="item">
+            <div class="bg-image" style="background: url(<?php echo $bannerImage ?>) no-repeat;">
+            </div>
+
+        </div>
+    <?php endforeach; ?>
+</div>
+<style>
+        .bg-image {
+            padding: 100px;
+            background-size: cover !important;
+            background-position: center center !important;
+            height: 300px;
+        }
+        div#dynamic_banner .owl-dots {
+    position: relative;
+    margin-top: -35px;
+}
+        p.book_btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .bg-text {
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .bg-text h2 {
+            position: relative;
+            text-transform: uppercase;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 0px;
+            font-weight: 700;
+            font-size: 50px;
+            padding-top: 0.77em !important;
+            padding-bottom: 0.77em !important;
+        }
+
+        .bg-text h2:before {
+            top: 0;
+        }
+
+        .bg-text h2:after {
+            bottom: 0;
+        }
+
+        .bg-text h2:before,
+        .bg-text h2:after {
+            content: '';
+            width: 1.9em;
+            height: 2px;
+            background-color: #fff;
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        p.book_btn {
+            padding: 12px;
+            font-size: 18px;
+            color: white;
+            text-transform: uppercase;
+            background: #039A0F;
+            border-radius: 10px;
+            width: 170px;
+            text-align: center;
+            margin: 0 auto;
+            display:unset;
+        }
+        <style>
+        .bg-image {
+            padding: 100px;
+            background-size: cover !important;
+            background-position: center center !important;
+        }
+        div#dynamic_banner .owl-dots {
+    position: relative;
+    margin-top: -35px;
+}
+        p.book_btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .bg-text {
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .bg-text h2 {
+            position: relative;
+            text-transform: uppercase;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 0px;
+            font-weight: 700;
+            font-size: 50px;
+            padding-top: 0.77em !important;
+            padding-bottom: 0.77em !important;
+        }
+
+        .bg-text h2:before {
+            top: 0;
+        }
+
+        .bg-text h2:after {
+            bottom: 0;
+        }
+
+        .bg-text h2:before,
+        .bg-text h2:after {
+            content: '';
+            width: 1.9em;
+            height: 2px;
+            background-color: #fff;
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        p.book_btn {
+            padding: 12px;
+            font-size: 18px;
+            color: white;
+            text-transform: uppercase;
+            background: #039A0F;
+            border-radius: 10px;
+            width: 170px;
+            text-align: center;
+            margin: 0 auto;
+        }
+    </style>
+<script type="text/javascript">
+    require(['jquery', 'OwlCarousel'], function($) {
+        jQuery("#dynamic_banner").owlCarousel({
+            "autoplay": true,
+            "autoPlayTimeout": 500,
+            "loop": true,
+            "items": 1,
+            "nav": true,
+            "navText": ["<", ">"],
+            "dots":true
+            
+        });
+    });
+</script>
+<style>
+  
+    .bg-image {
+        padding: 100px;
+        background-size: cover !important;
+        background-position: center center !important;
+        position: relative;
+    }
+
+    div#dynamic_banner .owl-nav
+   {
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        transform: translateY(-50%);
+    }
+
+    div#dynamic_banner .owl-prev,
+    div#dynamic_banner .owl-next
+     {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: red;
+        cursor: pointer;
+        font-size: 27px;
+        font-weight:bold;
+    }
+
+    div#dynamic_banner .owl-prev {
+        left: 10px;
+    }
+
+    div#dynamic_banner .owl-next {
+        right: 10px;
+    }
+    .owl-theme .owl-dots .owl-dot span {
+    width: 20px;
+    height: 3px;
+    margin: 5px 7px;
+    background: #D6D6D6;
+    display: block;
+    transition: opacity .2s ease;
+    /* border-radius: 100%; */
+}
+
+   
+
+
+    </style>
+<script type="text/javascript">
+    require(['jquery', 'OwlCarousel'], function($) {
+        jQuery("#dynamic_banner").owlCarousel({
+            "autoplay": true,
+            "autoPlayTimeout": 500,
+            "loop": true,
+            "items": 1,
+            "nav": true,
+            "navText": ["<", ">"],
+            "dots":true
+            
+            
+        });
+    });
+</script>

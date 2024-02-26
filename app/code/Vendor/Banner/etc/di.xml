@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Vendor\Banner\Api\BannerRepositoryInterface" type="Vendor\Banner\Model\BannerRepository"/>
+	<preference for="Vendor\Banner\Api\Data\BannerInterface" type="Vendor\Banner\Model\Data\Banner"/>
+	<preference for="Vendor\Banner\Api\Data\BannerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Vendor\Banner\Model\ResourceModel\Banner\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">banners</argument>
+			<argument name="resourceModel" xsi:type="string">Vendor\Banner\Model\ResourceModel\Banner\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="Vendor_Banner_listing_data_source" xsi:type="string">Vendor\Banner\Model\ResourceModel\Banner\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<virtualType name="Vendor\Banner\CustomformImageUpload" type="Vendor\Banner\Model\ImageUploader">
+	    <arguments>
+	            <argument name="baseTmpPath" xsi:type="string">banners/banner_images/tmp</argument>
+	            <argument name="basePath" xsi:type="string">banners/banner_images</argument>
+	            <argument name="allowedExtensions" xsi:type="array">
+	                <item name="jpg" xsi:type="string">jpg</item>
+	                <item name="jpeg" xsi:type="string">jpeg</item>
+	                <item name="gif" xsi:type="string">gif</item>
+	                <item name="png" xsi:type="string">png</item>
+	            </argument>
+	    </arguments>
+	</virtualType>
+	<type name="Vendor\Banner\Controller\Adminhtml\Banner\FileUploader\Save">
+	    <arguments>
+	            <argument name="imageUploader" xsi:type="object">Vendor\Banner\CustomformImageUpload</argument>
+	    </arguments>
+	</type>
+</config>
