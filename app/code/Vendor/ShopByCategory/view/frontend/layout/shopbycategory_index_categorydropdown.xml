@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Vendor\ShopByCategory\Block\Category" name="customform.categories" template="Vendor_ShopByCategory::shopbycategory.phtml" cacheable="false">
+            <block class="Vendor\ShopByCategory\Block\Categorydropdown" name="customform.categoriesdropdown" template="Vendor_ShopByCategory::category_dropdown.phtml" cacheable="false">
             </block>
         </referenceContainer>
     </body>

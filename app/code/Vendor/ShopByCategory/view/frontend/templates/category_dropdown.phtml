@@ -1,0 +1,258 @@
+<?php
+
+/** @var \WholesaleCustomer\ProductRestriction\Block\Subcategories $block */
+$categories = $block->getCategories();
+?>
+<style>
+    /* Container for the entire dropdown */
+    .category-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 50px;
+       
+    }
+
+    /* Style for the header (Categories) */
+    .header-category-title {
+        
+        margin-bottom: 6px;
+        font-size:17px
+        
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        box-shadow: 0 2px 12px rgba(0, 0, 0, .25);
+        position: absolute;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        width: 31.4vw;
+        height: auto;
+        top: 37px;
+    left: -5vw;
+        color: #4b4f54;
+        z-index: 1;
+        display: none;
+    }
+
+    .category-image-mega img {
+        width: 28px;
+    }
+
+    /* Style for main categories */
+    .dropdown-content .main-category {
+        font-size: 17px;
+        margin-bottom: 10px;
+
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+    color: black;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+  
+    /* Show the dropdown menu on hover */
+    .category-dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .category-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .dropdown-content-row {
+        display: flex;
+    }
+
+    .main-categories-column {
+        width: 50%;
+        display: inline-grid;
+        /* overflow: scroll; */
+        grid-template-rows: repeat(auto-fit, 55px);
+    }
+
+    .main-category {
+        display: inline-flex;
+        align-items: center;
+        border-bottom: 1px solid #f4f5ff;
+        width: 100%;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+    }
+
+    .sub-categories-column {
+        width: 50%;
+        display: inline-grid;
+        background-color: #f1f1f1;
+        padding: 10px 16px;
+        grid-template-rows: repeat(auto-fit, 56px);
+        /* overflow: scroll; */
+
+    }
+
+    .sub-category {
+        display: none;
+        align-items: center;
+        padding: unset;
+        width: 100%;
+        cursor: pointer;
+        align-self: center;
+        border-bottom: 1px solid #e6e6e6;
+    }
+
+    .sub-category:hover {
+        background-color: #fff;
+        color: #000;
+
+    }
+
+    .main-category:hover {
+        background-color: #f1f1f1;
+        color: #313131;
+        height: 100%;
+
+    }
+
+    .main-category img {
+        border-radius: 50%;
+    }
+
+    /* Responsive styles */
+    @media screen and (max-width: 768px) {
+        .category-dropdown {
+            display: none;
+        }
+
+
+    }
+
+    .category-image-top-parent {
+        box-sizing: border-box;
+        display: inline-block;
+        overflow: hidden;
+        width: initial;
+        height: initial;
+        background: none;
+        opacity: 1;
+        border: 0px;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+        max-width: 100%;
+        margin: 12px 16px 8px 12px;
+    }
+
+    .category-image-child-span {
+        box-sizing: border-box;
+        display: block;
+        width: initial;
+        height: initial;
+        background: none;
+        opacity: 1;
+        border: 0px;
+        margin: 0px;
+        padding: 0px;
+        max-width: 100%;
+    }
+
+    .category-image-cover {
+        display: block;
+        max-width: 100%;
+        width: initial;
+        height: initial;
+        background: none;
+        opacity: 1;
+        border: 0px;
+        margin: 0px;
+        padding: 0px;
+
+    }
+    .category-image-main
+    {
+        width:36px;
+        height:auto
+    }
+</style>
+
+<div class="category-dropdown">
+    <div class="category-label">
+        <div class="category-image-mega">
+            <img src="https://www.licious.in/image/rebranding/svg/categories-grey.svg" alt="Categories dropdown">
+        </div>
+        <p class="header-category-title">Categories</p>
+    </div>
+    <?php if ($categories->count() > 0) : ?>
+        <div class="dropdown-content">
+            <div class="dropdown-content-row">
+                <div class="main-categories-column">
+                    <?php foreach ($categories as $category) : ?>
+                        <?php
+                        $subcategories = $block->getSubcategories($category->getId());
+                        ?>
+                        <?php if ($subcategories !== null && count($subcategories) > 0) : ?>
+                            <div class="main-category category-<?= $category->getId() ?>">
+                                <a href="<?= $category->getUrl() ?>">
+                                    <?php if ($category->getImageUrl()) : ?>
+                                        <span class="category-image-top-parent">
+                                            <span class="category-image-child-span">
+                                                <img class="category-image-cover" alt="" aria-hidden="true" src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2736%27%20height=%2736%27/%3e">
+                                            </span>
+                                            <img class="category-image-main" src="<?= $category->getImageUrl() ?>" alt="<?= $block->escapeHtml($category->getName()) ?>" >
+                                        </span>
+                                    <?php endif; ?>
+                                </a>
+                                <span class="category-name"><?= $block->escapeHtml($category->getName()) ?></span>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="sub-categories-column">
+                    <?php foreach ($categories as $category) : ?>
+                        <?php
+                        $subcategories = $block->getSubcategories($category->getId());
+                        ?>
+                        <?php if ($subcategories !== null && count($subcategories) > 0) : ?>
+                            <?php foreach ($subcategories as $subcategory) : ?>
+                                <div class="sub-category category-<?= $category->getId() ?>">
+                                    <a href="<?= $subcategory->getUrl() ?>">
+                                        <?= $block->escapeHtml($subcategory->getName()) ?>
+                                    </a>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+
+
+<script>
+    require(['jquery'], function($) {
+
+        $('.main-category:first').trigger('mouseenter');
+
+        $('.main-category').hover(
+            function() {
+
+                $('.sub-category').hide();
+
+                const categoryId = $(this).attr('class').match(/category-(\d+)/)[1];
+                $(`.sub-category.category-${categoryId}`).show();
+            }
+        );
+    });
+</script>
